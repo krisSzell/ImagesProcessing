@@ -10,5 +10,7 @@ namespace ImagesProcessing.Models
         public int Id { get; set; }
         public string Data { get; set; }
         public string Checksum { get; set; }
+        public byte[] PhData { get; set; }
+
     }
 }

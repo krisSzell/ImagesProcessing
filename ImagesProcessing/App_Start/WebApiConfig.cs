@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using ImagesProcessing.Formatters;
 
 namespace ImagesProcessing
 {
@@ -13,6 +14,7 @@ namespace ImagesProcessing
             // Web API configuration and services
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+            config.Formatters.Add(new PhotoJpegFormatter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

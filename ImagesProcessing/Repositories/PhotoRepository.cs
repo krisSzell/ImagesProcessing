@@ -38,5 +38,6 @@ namespace ImagesProcessing.Repositories
         {
             _context.Photos.Add(photo);
         }
+
     }
 }

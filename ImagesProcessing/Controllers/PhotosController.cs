@@ -3,9 +3,13 @@ using ImagesProcessing.Persistence;
 using ImagesProcessing.Responses;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -73,6 +77,31 @@ namespace ImagesProcessing.Controllers
             _unitOfWork.Complete();
 
             return Ok(photo);
+        }
+
+        [Route("api/photos/test")]
+        [HttpPost]
+        public IHttpActionResult Test(byte[] array)
+        {
+            var photo = new Photo()
+            {
+                Data = "test",
+                Checksum = "checksum",
+                PhData = array
+            };
+            _context.Photos.Add(photo);
+            _context.SaveChanges();
+
+            return Created(HttpContext.Current.Server.MapPath("~/") + "api/photos/test", photo);
+        }
+
+        [Route("api/photos/test")]
+        [HttpGet]
+        public IHttpActionResult Test()
+        {
+            var photo = _context.Photos.Single(p => p.Id == 7);
+
+            return Ok(photo.PhData);
         }
     }
 }
